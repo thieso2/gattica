@@ -15,7 +15,7 @@ module Gattica
       @items_per_page = xml.at('openSearch:itemsPerPage').inner_html.to_i
       @start_date = Date.parse(xml.at('dxp:startDate').inner_html)
       @end_date = Date.parse(xml.at('dxp:endDate').inner_html)
-      @updated = DateTime.parse(xml.at('updated').inner_html)
+      @updated = xml.at('updated').inner_html.strip
       @points = xml.search(:entry).collect { |entry| DataPoint.new(entry) }
     end
     
